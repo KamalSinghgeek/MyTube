@@ -9,10 +9,10 @@ const Navbar = () => (
     direction="row" 
     alignItems="center" 
     p={2} 
-    sx={{position: 'sticky', background: '#000', top:10, justifycontent: 'space-between'}} 
+    sx={{position: 'sticky', background: '#000', top:1, justifycontent: 'space-between'}} 
     >
       <Link to="/" style={{display:'flex', alighItems: 'center', marginRight: '800px'}}>
-        <img src={logo} alt="logo" height={70} />
+        <img src={logo} alt="logo" height={50} />
       </Link>
       <SearchBar/>
     </Stack>
