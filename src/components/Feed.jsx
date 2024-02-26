@@ -1,5 +1,6 @@
 import {useStat, useEffect} from 'react';
 import {Box, Stack, Typography} from '@mui/material';
+import Sidebar from './Sidebar';
 
 
 const Feed = () => {
@@ -8,11 +9,12 @@ const Feed = () => {
     "column",  md: "row" } }}>
     <Box sx={{ height: {sx:'auto', md:
     '92vh' }, borderRight: '1px solid #3d3d3d', px: {sx:0, md:2 }}}>
-      Sidebar
+    <Sidebar/>
+   
       <Typography className="copyright"
       variant="body" sx={{mt:1.5,
       color: '#fff' }}>
-      Copyright©2024 -KamalSingh@BoringTube.com
+      Copyright©2024 -KamalSingh
 
       </Typography>
     </Box>
