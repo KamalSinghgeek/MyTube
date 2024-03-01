@@ -10,6 +10,10 @@ const ChannelCard = ({channelDetail}) => (
    sx={{
     boxShadow: 'none',
     borderRadius:'20px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: {xs:'356px', md:'320px'}
    }}
     >
     <Link to={`/channel/${channelDetail?.id?.channelId}`}>
