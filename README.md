@@ -1,70 +1,147 @@
-# Getting Started with Create React App
+## MyTube 📺🎶
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A YouTube‑style video player SPA built with React, Material‑UI, and Axios. Browse trending videos, search by keyword, view video details, channel info and related content.
 
-## Available Scripts
+### Table of Contents
 
-In the project directory, you can run:
+1. [Features](#features-1)
+2. [Tech Stack](#tech-stack-1)
+3. [Folder Structure](#folder-structure-1)
+4. [Getting Started](#getting-started-1)
 
-### `npm start`
+   * [Prerequisites](#prerequisites-1)
+   * [Installation](#installation-1)
+   * [Available Scripts](#available-scripts-1)
+5. [Component Overview](#component-overview-1)
+6. [API Integration](#api-integration)
+7. [Routing Diagram](#routing-diagram)
+8. [Theming & Styles](#theming--styles)
+9. [Contributing](#contributing-1)
+10. [License](#license-1)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Features
 
-### `npm test`
+* **Home (Feed)** – Trending & recommended video grid
+* **Search** – Live search results by keyword
+* **Video Detail** – Plays video, shows title, description, statistics, and comments
+* **Channel Detail** – Channel banner, subscriber count, and channel’s videos
+* **Responsive Layout** – Adapts to mobile, tablet and desktop
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Tech Stack
 
-### `npm run build`
+* **Framework**: React 18 (CRA)
+* **UI Library**: Material‑UI (MUI v5)
+* **Styling**: @emotion/react + @emotion/styled
+* **Networking**: Axios
+* **Video**: react‑player
+* **Routing**: React Router v6
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Folder Structure
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+MyTube/
+├── public/
+│   ├── index.html
+│   ├── favicon.ico
+│   └── manifest.json
+├── src/
+│   ├── api/
+│   │   └── youtube.js          # Axios instance & endpoint helpers
+│   ├── components/
+│   │   ├── Navbar.jsx
+│   │   ├── Feed.jsx
+│   │   ├── SearchFeed.jsx
+│   │   ├── VideoDetail.jsx
+│   │   ├── ChannelDetail.jsx
+│   │   ├── VideoCard.jsx
+│   │   └── ChannelCard.jsx
+│   ├── App.js                  # Routes setup
+│   ├── index.js                # ReactDOM mount
+│   └── index.css               # Base styles & MUI overrides
+├── .gitignore
+├── package.json
+└── README.md
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Getting Started
 
-### `npm run eject`
+#### Prerequisites
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+* Node.js ≥14
+* npm or yarn
+* YouTube Data API key
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Installation
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+git clone https://github.com/KamalSinghgeek/MyTube.git
+cd MyTube
+npm install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Create a `.env` in project root:
 
-## Learn More
+```bash
+REACT_APP_YT_API_KEY=YOUR_YOUTUBE_DATA_API_KEY
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Available Scripts
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* `npm start`
+  Runs the app in development mode at `http://localhost:3000/`.
+* `npm run build`
+  Builds for production to the `build/` directory.
+* `npm test`
+  Launches test runner.
+* `npm run eject`
+  Ejects CRA config (one‑way).
 
-### Code Splitting
+### Component Overview
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+| Component           | Path                               | Description                             |
+| :------------------ | :--------------------------------- | :-------------------------------------- |
+| `<Navbar />`        | `src/components/Navbar.jsx`        | Top app bar with search input           |
+| `<Feed />`          | `src/components/Feed.jsx`          | Displays grid of videos (trending/home) |
+| `<SearchFeed />`    | `src/components/SearchFeed.jsx`    | Shows search results grid               |
+| `<VideoDetail />`   | `src/components/VideoDetail.jsx`   | Video player, metadata & comments       |
+| `<ChannelDetail />` | `src/components/ChannelDetail.jsx` | Channel info banner & video list        |
+| `<VideoCard />`     | `src/components/VideoCard.jsx`     | Single video thumbnail card             |
+| `<ChannelCard />`   | `src/components/ChannelCard.jsx`   | Channel avatar & name card              |
 
-### Analyzing the Bundle Size
+### API Integration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+All YouTube Data API calls are centralized in `src/api/youtube.js` via Axios. It exports functions like:
 
-### Making a Progressive Web App
+```js
+getPopularVideos(params)
+getSearchResults(query)
+getVideoById(videoId)
+getChannelById(channelId)
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Routing Diagram
 
-### Advanced Configuration
+```
+/                   → <Feed />
+/search/:searchTerm → <SearchFeed />
+/video/:id          → <VideoDetail />
+/channel/:id        → <ChannelDetail />
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Theming & Styles
 
-### Deployment
+* Uses MUI’s ThemeProvider by default (custom overrides in `index.css`).
+* Emotion CSS‑in‑JS for component‑scoped styles.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Contributing
 
-### `npm run build` fails to minify
+1. Fork the repo
+2. Create a feature branch (`git checkout -b feature/foo`)
+3. Commit (`git commit -m "Add foo"`)
+4. Push & open PR
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### License
+
+MIT License.
